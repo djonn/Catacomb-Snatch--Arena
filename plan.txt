@@ -1,0 +1,84 @@
+#########################################################
+#														#
+#				//Catacomb Snatch Arena//				#
+#														#
+#				//original by: Mojang//					#
+#				//edited by: Djonn//					#
+#														#
+#########################################################
+
+Catacomb Snatch Arena is an arena version of Mojang's Catacomb Snatch.
+You have to kill monsters in order to survive
+
+#-- PLAYER --#
+X Player spawns in middle
+X shop with hearts(life) and turrets(much more expensive) (maybe also bomb, but bigger)
+X Player does not regenerate, if he needs health he needs to buy hearts
+Z Instead of %-score kill-score is shown
+	//---Multiplayer---//
+Both players on same team (co-op)
+Scores are shown respectively
+
+
+#-- MONSTERS --#
+Y[7] Monsters spawn at 4(maybe 8) spots (corners and sides)
+More kinds of monsters
+Monsters are attracted to middle (grail?)
+Monsters drop less treasure
+Spawners are not breakable
+
+
+#-- GUI --#
+How-to tab (at main menu)
+pause / ingame (esc key)
+
+
+#-- OTHER --# (some of these are maybe's)
+Y Custom map
+X Hearts for health regeneration
+No tent area
+Different arenas
+Arena selection
+Buff's
+Difficulties, strong/more monsters
+Other weapons
+More monsters over time
+Bats fly over holes
+Recoloring players/new skins for extra players
+4 player
+if other player quits, dont crash
+
+
+
+!###--- WHAT HAVE BEEN DONE ---###!
+Harvester crash bug fixed (still drops money)
+Players getting each others points fixed
+Low latency in multiplayer improved
+
+random spawner placement deactivated
+no winning
+
+
+
+#-- ART --#
+Menu Buttons
+Heart
+
+
+X = Done
+Y = Might need more attention
+Z = ??
+
+
+
+
+
+
+
+
+
+
+
+
+
+
