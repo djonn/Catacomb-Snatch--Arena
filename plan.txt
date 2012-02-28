@@ -1,10 +1,10 @@
 #########################################################
-#														#
-#				//Catacomb Snatch Arena//				#
-#														#
-#				//original by: Mojang//					#
-#				//edited by: Djonn//					#
-#														#
+#							#
+#		//Catacomb Snatch Arena//		#
+#							#
+#		//original by: Mojang//			#
+#		//edited by: Djonn//			#
+#							#
 #########################################################
 
 Catacomb Snatch Arena is an arena version of Mojang's Catacomb Snatch.
