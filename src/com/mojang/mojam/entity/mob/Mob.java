@@ -4,6 +4,7 @@ import com.mojang.mojam.MojamComponent;
 import com.mojang.mojam.entity.*;
 import com.mojang.mojam.entity.animation.EnemyDieAnimation;
 import com.mojang.mojam.entity.loot.Loot;
+import com.mojang.mojam.level.Level;
 import com.mojang.mojam.math.Vec2;
 import com.mojang.mojam.screen.*;
 
@@ -158,6 +159,17 @@ public abstract class Mob extends Entity {
                 xBump = bullet.xa / 5.0;
                 yBump = bullet.ya / 5.0;
             }
+        }
+        
+        if(health < 1){
+        	int killerteam = bullet.owner.team;
+        	
+        	if(killerteam == 1){
+        		Level.player1Score += 1;
+        	} else if (killerteam == 2){
+        		Level.player2Score += 1;
+        	}
+        	
         }
     }
 

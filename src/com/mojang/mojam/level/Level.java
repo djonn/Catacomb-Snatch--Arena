@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 import com.mojang.mojam.MojamComponent;
 import com.mojang.mojam.entity.Entity;
 import com.mojang.mojam.entity.Player;
-import com.mojang.mojam.entity.building.Heart;
 import com.mojang.mojam.entity.building.ShopItem;
 import com.mojang.mojam.entity.building.SpawnerEntity;
 import com.mojang.mojam.entity.building.TreasurePile;
@@ -41,8 +40,8 @@ public class Level {
     private boolean seen[];
     final int[] neighbourOffsets;
 
-    public int player1Score = 0;
-    public int player2Score = 0;
+    public static int player1Score = 0;
+    public static int player2Score = 0;
 
     @SuppressWarnings("unchecked")
     public Level(int width, int height) {
@@ -111,7 +110,8 @@ public class Level {
                 } else if (col == 0x969696) {
                     tile = new UnbreakableRailTile(new FloorTile());
                 } else if (col == 0x888800) {
-                    tile = new UnpassableSandTile();
+                 //   tile = new UnpassableSandTile();
+                	tile = new SandTile();
                 } else if (col == 0xFF7777) {
                     tile = new DestroyableWallTile();
                 } else if (col == 0x000000) {
@@ -127,8 +127,8 @@ public class Level {
             }
         }
 
-        l.setTile(31, 7, new UnbreakableRailTile(new SandTile()));
-        l.setTile(31, 63 - 7, new UnbreakableRailTile(new SandTile()));
+        //l.setTile(31, 7, new UnbreakableRailTile(new SandTile()));
+        //l.setTile(31, 63 - 7, new UnbreakableRailTile(new SandTile()));
 
         for (int y = 0; y < h + 1; y++) {
             for (int x = 0; x < w + 1; x++) {
@@ -166,8 +166,8 @@ public class Level {
     	addEntity(new SpawnerEntity((1+8.5)*32, (46+8.5)*32, Team.Neutral, random.nextInt(3)));
     	addEntity(new SpawnerEntity((46+8.5)*32, (46+8.5)*32, Team.Neutral, random.nextInt(3)));
     	addEntity(new SpawnerEntity((46+8.5)*32, (1+8.5)*32, Team.Neutral, random.nextInt(3)));
-    	addEntity(new SpawnerEntity((1+8.5)*32, (23+8.5)*32, Team.Neutral, random.nextInt(3)));
-    	addEntity(new SpawnerEntity((46+8.5)*32, (23+8.5)*32, Team.Neutral, random.nextInt(3)));
+    	addEntity(new SpawnerEntity((1+8.5)*32, (24+8.5)*32, Team.Neutral, random.nextInt(3)));
+    	addEntity(new SpawnerEntity((46+8.5)*32, (24+8.5)*32, Team.Neutral, random.nextInt(3)));
     	addEntity(new SpawnerEntity((23+8.5)*32, (46+8.5)*32, Team.Neutral, random.nextInt(3)));
     	
     	//addEntity(new Heart((23+8.5)*32, (24+8.5)*32, Team.Team1));
@@ -389,18 +389,19 @@ public class Level {
                     screen.blit(Art.floorTiles[5][0], x * Tile.WIDTH, y * Tile.HEIGHT);
                     continue;
                 }
-                int xt = x - 28;
-                int yt = y - 4;
-                if (xt >= 0 && yt >= 0 && xt < 7 && yt < 4 && (xt != 3 || yt < 3)) {
-                    screen.blit(Art.startHerrSpeck[xt][yt], x * Tile.WIDTH, y * Tile.HEIGHT);
-                    continue;
-                }
-
-                yt = y - (64 - 8);
-                if (xt >= 0 && yt >= 0 && xt < 7 && yt < 4 && (xt != 3 || yt > 0)) {
-                    screen.blit(Art.startLordLard[xt][yt], x * Tile.WIDTH, y * Tile.HEIGHT);
-                    continue;
-                }
+                
+//                int xt = x - 28;
+//                int yt = y - 4;
+//                if (xt >= 0 && yt >= 0 && xt < 7 && yt < 4 && (xt != 3 || yt < 3)) {
+//                    screen.blit(Art.startHerrSpeck[xt][yt], x * Tile.WIDTH, y * Tile.HEIGHT);
+//                    continue;
+//                }
+//
+//                yt = y - (64 - 8);
+//                if (xt >= 0 && yt >= 0 && xt < 7 && yt < 4 && (xt != 3 || yt > 0)) {
+//                    screen.blit(Art.startLordLard[xt][yt], x * Tile.WIDTH, y * Tile.HEIGHT);
+//                    continue;
+//                }
                 if (canSee(x, y)) {
                     tiles[x + y * width].render(screen);
                 }

@@ -14,7 +14,6 @@ public class Building extends Mob implements IUsable {
     public int spawnTime = 0;
     public boolean highlight = false;
 
-
     public Building(double x, double y, int team) {
         super(x, y, team);
         setStartHealth(20);

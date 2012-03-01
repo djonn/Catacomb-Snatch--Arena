@@ -67,6 +67,7 @@ public class Art {
     public static Bitmap heart = load("/heart.png"); //heart image
     public static Bitmap heartShop = load("/heartShop.png"); //heart image for shop
     public static Bitmap[][] fxHeartUseSmall = cut("/effects/fx_heartuse_small.png", 32, 32); //animation for using heart
+    public static Bitmap infomenu = load("/infomenu.png"); //picture for the info menu
     
     
 

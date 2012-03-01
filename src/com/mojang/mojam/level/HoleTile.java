@@ -2,6 +2,7 @@ package com.mojang.mojam.level;
 
 import com.mojang.mojam.entity.Bullet;
 import com.mojang.mojam.entity.Entity;
+import com.mojang.mojam.entity.mob.Bat;
 import com.mojang.mojam.level.tile.Tile;
 import com.mojang.mojam.screen.Art;
 import com.mojang.mojam.screen.Screen;
@@ -27,6 +28,11 @@ public class HoleTile extends Tile {
     }
 
     public boolean canPass(Entity e) {
-        return (e instanceof Bullet);
+    	
+    	if (e instanceof Bat || e instanceof Bullet){
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 }

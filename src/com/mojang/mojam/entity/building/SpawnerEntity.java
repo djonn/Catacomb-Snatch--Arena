@@ -12,6 +12,8 @@ public class SpawnerEntity extends Building {
     public int spawnTime = 0;
 
     public int type;
+    
+    
 
     public SpawnerEntity(double x, double y, int team, int type) {
         super(x, y, team);
@@ -33,6 +35,7 @@ public class SpawnerEntity extends Building {
             spawn();
             spawnTime = SPAWN_INTERVAL;
         }
+        this.health = 20;
     }
 
     private void spawn() {
