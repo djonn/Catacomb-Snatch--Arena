@@ -37,7 +37,7 @@ public class Keys {
     public Key left = new Key();
     public Key right = new Key();
     public Key fire = new Key();
-    public Key build = new Key();
+    //public Key build = new Key();
     public Key use = new Key();
 
     public void tick() {

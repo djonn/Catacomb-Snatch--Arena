@@ -15,6 +15,7 @@ public class MojamApplet extends Applet {
     }
 
     public void start() {
+    	
         game.start();
     }
 

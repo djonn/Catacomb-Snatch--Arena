@@ -203,31 +203,31 @@ public class Player extends Mob implements LootCollector {
         int x = (int) pos.x / Tile.WIDTH;
         int y = (int) pos.y / Tile.HEIGHT;
 
-        if (keys.build.isDown && !keys.build.wasDown) {
-            if (level.getTile(x, y).isBuildable()) {
-                if (score >= COST_RAIL && time - lastRailTick >= RailDelayTicks) {
-                    lastRailTick = time;
-                    level.placeTile(x, y, new RailTile(level.getTile(x, y)), this);
-                    payCost(COST_RAIL);
-                }
-            } else if (level.getTile(x, y) instanceof RailTile) {
-                if ((y < 8 && team == Team.Team2) || (y > level.height - 9 && team == Team.Team1)) {
-                    if (score >= COST_DROID) {
-                        level.addEntity(new RailDroid(pos.x, pos.y, team));
-                        payCost(COST_DROID);
-                    }
-                } else {
-
-                    if (score >= COST_REMOVE_RAIL && time - lastRailTick >= RailDelayTicks) {
-                        lastRailTick = time;
-                        if (((RailTile) level.getTile(x, y)).remove()) {
-                            payCost(COST_REMOVE_RAIL);
-                        }
-                    }
-                    MojamComponent.soundPlayer.playSound("/sound/Track Place.wav", (float) pos.x, (float) pos.y);
-                }
-            }
-        }
+//        if (keys.build.isDown && !keys.build.wasDown) {
+//            if (level.getTile(x, y).isBuildable()) {
+//                if (score >= COST_RAIL && time - lastRailTick >= RailDelayTicks) {
+//                    lastRailTick = time;
+//                    level.placeTile(x, y, new RailTile(level.getTile(x, y)), this);
+//                    payCost(COST_RAIL);
+//                }
+//            } else if (level.getTile(x, y) instanceof RailTile) {
+//                if ((y < 8 && team == Team.Team2) || (y > level.height - 9 && team == Team.Team1)) {
+//                    if (score >= COST_DROID) {
+//                        level.addEntity(new RailDroid(pos.x, pos.y, team));
+//                        payCost(COST_DROID);
+//                    }
+//                } else {
+//
+//                    if (score >= COST_REMOVE_RAIL && time - lastRailTick >= RailDelayTicks) {
+//                        lastRailTick = time;
+//                        if (((RailTile) level.getTile(x, y)).remove()) {
+//                            payCost(COST_REMOVE_RAIL);
+//                        }
+//                    }
+//                    MojamComponent.soundPlayer.playSound("/sound/Track Place.wav", (float) pos.x, (float) pos.y);
+//                }
+//            }
+//        }
 
 
 
@@ -455,7 +455,7 @@ public class Player extends Mob implements LootCollector {
 
     @Override
     public void hurt(Bullet bullet) {
-        hurt(bullet, 1);
+        //hurt(bullet, 1);
     }
 
     public String getDeatchSound() {

@@ -11,6 +11,7 @@ import javax.swing.*;
 
 import com.mojang.mojam.entity.Player;
 import com.mojang.mojam.entity.building.Base;
+import com.mojang.mojam.entity.mob.Pather;
 import com.mojang.mojam.entity.mob.Team;
 import com.mojang.mojam.gui.*;
 import com.mojang.mojam.gui.Button;
@@ -69,6 +70,11 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
         TitleMenu menu = new TitleMenu(GAME_WIDTH, GAME_HEIGHT);
         addMenu(menu);
         addKeyListener(this);
+        
+        
+        
+        
+        
     }
 
     public void mouseDragged(MouseEvent arg0) {
@@ -137,6 +143,9 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
         }
 
         level.init();
+        
+        //level.addEntity(new Pather((((level.width / 2)) * Tile.WIDTH) , (level.height - 10 ) * Tile.HEIGHT- 16,Team.Team1));
+        level.addEntity(new Pather((23+8.5)*32, (23+8.5)*32, Team.Neutral));
 
         //players[0] = new Player(synchedKeys[0], level.width * Tile.WIDTH / 2 - 16, (level.height - 5 - 1) * Tile.HEIGHT - 16, Team.Team1);
         players[0] = new Player(synchedKeys[0], level.width * Tile.WIDTH / 2 - 16, level.height * Tile.HEIGHT / 2 - 16, Team.Team1);
@@ -152,6 +161,8 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
         }
         player = players[localId];
         player.setCanSee(true);
+        
+        
     }
 
     public void run() {

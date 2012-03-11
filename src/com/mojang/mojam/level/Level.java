@@ -18,6 +18,7 @@ import com.mojang.mojam.entity.building.ShopItem;
 import com.mojang.mojam.entity.building.SpawnerEntity;
 import com.mojang.mojam.entity.building.TreasurePile;
 import com.mojang.mojam.entity.mob.Team;
+import com.mojang.mojam.entity.mob.Pather;
 import com.mojang.mojam.gui.Font;
 import com.mojang.mojam.gui.Notifications;
 import com.mojang.mojam.level.tile.*;
@@ -30,6 +31,7 @@ import com.mojang.mojam.screen.Screen;
 
 public class Level {
     public static final int TARGET_SCORE = 100;
+    public int time = 0;
 
     public final int width, height;
 
@@ -38,6 +40,7 @@ public class Level {
     public List<Entity> entities = new ArrayList<Entity>();
     private Bitmap minimap;
     private boolean seen[];
+    private boolean debugOverlay[];
     final int[] neighbourOffsets;
 
     public static int player1Score = 0;
@@ -170,6 +173,8 @@ public class Level {
     	addEntity(new SpawnerEntity((46+8.5)*32, (24+8.5)*32, Team.Neutral, random.nextInt(3)));
     	addEntity(new SpawnerEntity((23+8.5)*32, (46+8.5)*32, Team.Neutral, random.nextInt(3)));
     	
+    	
+    	//addEntity(new Pather((23+8.5)*32, (23+8.5)*32, Team.Team1));
     	//addEntity(new Heart((23+8.5)*32, (24+8.5)*32, Team.Team1));
     }
 
@@ -196,6 +201,32 @@ public class Level {
         int y = (int) pos.y / Tile.HEIGHT;
         return getTile(x, y);
     }
+    
+	public Vec2 getTileFromPosition(Vec2 pos) {
+		int x = (int) pos.x / Tile.WIDTH;
+		int y = (int) pos.y / Tile.HEIGHT;
+		return new Vec2(x, y);
+	}
+	public Vec2 getPositionFromTile(int x, int y) {
+		return new Vec2(x*Tile.WIDTH+(Tile.WIDTH/2), y*Tile.HEIGHT+(Tile.HEIGHT/2));
+	}
+	public void insertToEntityMap1(Entity e) {
+		e.xto = (int) (e.pos.x - e.radius.x) / Tile.WIDTH;
+		e.yto = (int) (e.pos.y - e.radius.y) / Tile.HEIGHT;
+
+		int x1 = e.xto + (int) (e.radius.x * 2 + 1) / Tile.WIDTH;
+		int y1 = e.yto + (int) (e.radius.y * 2 + 1) / Tile.HEIGHT;
+
+		for (int y = e.yto; y <= y1; y++) {
+			if (y < 0 || y >= height)
+				continue;
+			for (int x = e.xto; x <= x1; x++) {
+				if (x < 0 || x >= width)
+					continue;
+				entityMap[x + y * width].add(e);
+			}
+		}
+	}
 
     public void insertToEntityMap(Entity e) {
         e.xto = (int) (e.pos.x - e.radius.x) / Tile.WIDTH;
@@ -306,7 +337,7 @@ public class Level {
     public void addEntity(Entity e) {
         e.init(this);
         entities.add(e);
-        insertToEntityMap(e);
+        insertToEntityMap1(e);
     }
 
     public void removeEntity(Entity e) {
@@ -333,7 +364,7 @@ public class Level {
 //            }
 //        }
     	
-    	
+    	time++;
     	
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
@@ -344,7 +375,7 @@ public class Level {
                 int ytn = (int) (e.pos.y - e.radius.y) / Tile.HEIGHT;
                 if (xtn != e.xto || ytn != e.yto) {
                     removeFromEntityMap(e);
-                    insertToEntityMap(e);
+                    insertToEntityMap1(e);
                 }
             }
             if (e.removed) {
@@ -509,8 +540,10 @@ public class Level {
         screen.blit(minimap, 429, screen.h - 80 + 5);
 
 
-        Font.draw(screen, "Lord Lard: " + player1Score + " Kills", 115, screen.h - 20);
-        Font.draw(screen, "Herr Von Speck: " + player2Score + " Kills", 56, screen.h - 36);
+        Font.draw(screen, "Lord Lard:" + player1Score + " Kills", 19, screen.h - 18);
+        Font.draw(screen, "Herr Von Speck:" + player2Score + " Kills", 19, screen.h - 34);
+        Font.draw(screen, "Time:" + time/60, 230, screen.h - 18);
+        Font.draw(screen, "Level:" + 1, 230, screen.h - 34);
 
         Notifications.getInstance().render(screen);
     }
@@ -597,4 +630,68 @@ public class Level {
             setTile(x, y, tile);
         }
     }
+
+	public boolean checkLineOfSight(Entity eSource, Vec2 vTarget) {
+
+		Vec2 tP;
+
+		tP = getTileFromPosition(eSource.pos);
+		int x1= (int)tP.x;
+		int y1= (int)tP.y;
+
+		tP = getTileFromPosition(vTarget);
+		int x2=(int)tP.x;
+		int y2=(int)tP.y;
+
+		if (
+				x1 >= width || x1 <=0 ||
+				x2 >= width || x2 <=0 ||
+				y1 >= height || y1 <=0 ||
+				y2 >= height || y2 <=0
+				) {
+			return false;
+		}
+		int dx=Math.abs(x2-x1);
+		int dy=Math.abs(y2-y1);
+		int sx=-1;
+		int sy=-1;
+
+		if (x1 < x2) sx=1;
+		if (y1 < y2) sy=1;
+
+		int err=dx-dy;
+		int e2;				
+		
+		do {
+			//debugOverlay[x1+y1*(width + 1)] = true;
+			if (! getTile(x1,y1).canPass(eSource))
+				return false;
+
+			if (x1==x2 && y1==y2) break;
+
+			e2=2*err;
+			if ( e2 > -dy ) {
+				err-=dy;
+				x1+=sx;
+				//debugOverlay[(x1)+(y1*(width + 1))] = true;
+
+				if (! getTile(x1,y1).canPass(eSource))
+					return false;
+
+			}
+			if (e2 < dx ) {
+				err+=dx;
+				y1+=sy;
+				//debugOverlay[x1+((y1)*(width + 1))] = true;
+				if (! getTile(x1,y1).canPass(eSource))
+					return false;
+			}
+		} while ( true );
+
+		return true;
+	}
+	public boolean checkLineOfSight(Entity eSource, Entity eTarget) {
+
+		return checkLineOfSight(eSource,eTarget.pos);
+	}
 }

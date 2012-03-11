@@ -3,6 +3,7 @@ package com.mojang.mojam.entity.building;
 import com.mojang.mojam.entity.Entity;
 import com.mojang.mojam.entity.Player;
 import com.mojang.mojam.entity.animation.HeartUseSmall;
+import com.mojang.mojam.entity.animation.SmokePuffAnimation;
 import com.mojang.mojam.screen.Art;
 import com.mojang.mojam.screen.Bitmap;
 import com.mojang.mojam.screen.Screen;

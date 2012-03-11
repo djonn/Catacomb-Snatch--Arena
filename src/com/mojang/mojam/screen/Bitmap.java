@@ -115,4 +115,61 @@ public class Bitmap {
             }
         }
     }
+    
+public void line(int x1, int y1, int x2, int y2, int color) {
+		
+		/*if (x1 < 0)
+			x1 = 0;
+		if (y1 < 0)
+			y1 = 0;
+		if (x1 > w)
+			x1 = w;
+		if (y1 > h)
+			y1 = h;
+		
+		if (x2 < 0)
+			x2 = 0;
+		if (y2 < 0)
+			y2 = 0;
+		if (x2 > w)
+			x2 = w;
+		if (y2 > h)
+			y2 = h;*/
+		
+		if (
+				x1 >= w || x1 <=0 ||
+				x2 >= w || x2 <=0 ||
+				y1 >= h || y1 <=0 ||
+				y2 >= h || y2 <=0
+				) {
+			return;
+		}
+		
+		int dx=Math.abs(x2-x1);
+		int dy=Math.abs(y2-y1);
+		int sx=1;
+		int sy=1;
+		
+		if (x1 > x2) sx=-1;
+		if (y1 > y2) sy=-1;
+		
+		int err=dx-dy;
+		int e2=2*err;				
+		
+		do {
+			pixels[y1*w + x1] = color;
+			if (x1==x2 && y1==y2) break;
+			
+			e2=2*err;
+			if ( e2 > -dy ) {
+				err-=dy;
+				x1+=sx;
+			}
+			if (e2 < dx ) {
+				err+=dx;
+				y1+=sy;
+			}
+		} while ( true );
+		
+	}
 }

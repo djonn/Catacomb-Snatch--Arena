@@ -2,6 +2,7 @@
 # Catacomb Snatch
 # Original by: Mojang
 # Mod by: Djonn
+# Help by: delvarif
 ¤######---
 
 Catacomb Snatch Arena is an arena version of Mojang's Catacomb Snatch.
@@ -10,33 +11,36 @@ You have to kill your enemies in order to survive, if they destroy the Holy Grai
 #-- PLAYER --#
 X Player spawns in middle
 X shop with hearts(life) and turrets(much more expensive) (maybe also bomb, but bigger)
+    -green/blue revive heart if your friend dies in multiplayer
 X Player does not regenerate, if he needs health he needs to buy hearts
 X Instead of %-score kill-score is shown
 	//---Multiplayer---//
-Both players on same team (co-op)
+X Both players on same team (co-op) (players dont hurt each other)
 X Scores are shown respectively
 
 
 #-- MONSTERS --#
 Y[7] Monsters spawn at 4(maybe 8) spots (corners and sides)
 More kinds of monsters
-Monsters are attracted to middle (grail?)
+Y[go towards middle]Monsters are attracted to middle (grail?)(A* pathfinding) unless player is near
 Monsters drop less treasure
 X Spawners are not breakable
+Spawners cant be moved
 
 
 #-- GUI --#
 Y How-to tab (at main menu)
-pause / ingame (esc key)
+pause - ingame (esc key)
 display grail life
+multiplayer host/wait screen
+Y[levels] player scores, time, level info (maybe overall score)
 
 
 #-- OTHER --# (some of these are maybe's)
 Y Custom map
-X Hearts for health regeneration
+Y[effect animation] Hearts for health regeneration
 X No tent area
-Different arenas
-Arena selection
+multiple levels (level progression)
 Buff's
 Difficulties, strong/more monsters
 Other weapons
@@ -45,7 +49,8 @@ X Bats fly over holes
 Recoloring players/new skins for extra players (or color selection)
 4 player
 if other player quits, dont crash
-
+taskbar icon + name
+destroyable grail (mobs only)
 
 
 !###--- WHAT HAVE BEEN DONE ---###!
@@ -61,12 +66,13 @@ FPS removed
 #-- ART --#
 Menu Buttons
 Heart
+how to tab
+new game over image
 
 
 X = Done
 Y = Might need more attention
 Z = ??
-
 
 
 

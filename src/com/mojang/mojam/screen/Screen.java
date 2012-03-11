@@ -41,4 +41,8 @@ public class Screen extends Bitmap {
     public void fill(int x, int y, int width, int height, int color) {
         super.fill(x + xOffset, y + yOffset, width, height, color);
     }
+    
+	public void line(int x1, int y1, int x2, int y2, int color)  {
+		super.line(x1+ xOffset, y1 + yOffset, x2+ xOffset, y2 + yOffset,color) ;
+	}
 }
