@@ -2,7 +2,6 @@ package com.mojang.mojam.screen;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 import com.mojang.mojam.MojamComponent;
@@ -76,6 +75,9 @@ public class Art {
     public static Bitmap heartShop = load("/heartShop.png"); //heart image for shop
     public static Bitmap[][] fxHeartUseSmall = cut("/effects/fx_heartuse_small.png", 32, 32); //animation for using heart
     public static Bitmap infomenu = load("/infomenu.png"); //picture for the info menu
+    
+    public static BufferedImage icon32 = loadBufferedImage("/icon32.png");
+    public static BufferedImage icon64 = loadBufferedImage("/icon64.png");
     
     
 
@@ -173,4 +175,17 @@ public class Art {
 
         return null;
     }
+    
+	private static BufferedImage loadBufferedImage(String string) {
+		try {
+			BufferedImage bi = ImageIO.read(MojamComponent.class
+					.getResource(string));
+			return bi;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+    
 }

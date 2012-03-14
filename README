@@ -2,7 +2,7 @@
 # Catacomb Snatch
 # Original by: Mojang
 # Mod by: Djonn
-# Help by: delvarif
+# Help by: delvar
 ¤######---
 
 Catacomb Snatch Arena is an arena version of Mojang's Catacomb Snatch.
@@ -22,14 +22,14 @@ X Scores are shown respectively
 #-- MONSTERS --#
 Y[7] Monsters spawn at 4(maybe 8) spots (corners and sides)
 More kinds of monsters
-Y[go towards middle]Monsters are attracted to middle (grail?)(A* pathfinding) unless player is near
+X[thanks to delvar]AI - Monsters are attracted to middle (grail?)(A* pathfinding) unless player is near
 Monsters drop less treasure
 X Spawners are not breakable
 Spawners cant be moved
 
 
 #-- GUI --#
-Y How-to tab (at main menu)
+X How-to tab (at main menu)
 pause - ingame (esc key)
 display grail life
 multiplayer host/wait screen
@@ -49,7 +49,7 @@ X Bats fly over holes
 Recoloring players/new skins for extra players (or color selection)
 4 player
 if other player quits, dont crash
-taskbar icon + name
+X taskbar icon + name
 destroyable grail (mobs only)
 
 
@@ -59,7 +59,7 @@ Players getting each others points fixed
 Low latency in multiplayer improved
 random spawner placement deactivated
 no winning
-W, A & Space can be used in menus
+W, S & Space can be used in menus
 FPS removed
 
 

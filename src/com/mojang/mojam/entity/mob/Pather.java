@@ -56,7 +56,7 @@ public class Pather extends Mob {
 	public Pather(double x, double y, int team) {
 		super(x, y, team);
 		setPos(x, y);
-		setStartHealth(5);
+		setStartHealth(4);
 		dir = TurnSynchronizer.synchedRandom.nextDouble() * Math.PI * 2;
 		minimapColor = 0xffff0000;
 		yOffs = 10;
@@ -128,7 +128,7 @@ public class Pather extends Mob {
 
 	/**
 	 * 
-	 */
+	 
 	private void tryToShoot() {
 		if (--shootDelay <= 0) {
 
@@ -164,7 +164,7 @@ public class Pather extends Mob {
 				shootDelay = 10;
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * @return
@@ -686,8 +686,8 @@ public class Pather extends Mob {
 			}
 		}
 		freezeTime = TurnSynchronizer.synchedRandom.nextInt(5) + 5;
-		xBump = xa;
-		yBump = ya;
+		xBump = xa*0.5;
+		yBump = ya*0.5;
 
 		if (TurnSynchronizer.synchedRandom.nextInt(10) > 5)
 			resetPath();

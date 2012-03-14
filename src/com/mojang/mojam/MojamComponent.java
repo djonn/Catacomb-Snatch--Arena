@@ -9,6 +9,7 @@ import java.util.*;
 
 import javax.swing.*;
 
+
 import com.mojang.mojam.entity.Player;
 import com.mojang.mojam.entity.building.Base;
 import com.mojang.mojam.entity.mob.Pather;
@@ -20,6 +21,7 @@ import com.mojang.mojam.level.Level;
 import com.mojang.mojam.level.tile.Tile;
 import com.mojang.mojam.network.*;
 import com.mojang.mojam.network.packet.*;
+import com.mojang.mojam.screen.Art;
 import com.mojang.mojam.screen.Screen;
 import com.mojang.mojam.sound.SoundPlayer;
 
@@ -58,7 +60,7 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
     public static SoundPlayer soundPlayer;
 
     private int createServerState = 0;
-
+    
     public MojamComponent() {
         this.setPreferredSize(new Dimension(GAME_WIDTH * SCALE, GAME_HEIGHT * SCALE));
         this.setMinimumSize(new Dimension(GAME_WIDTH * SCALE, GAME_HEIGHT * SCALE));
@@ -145,7 +147,7 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
         level.init();
         
         //level.addEntity(new Pather((((level.width / 2)) * Tile.WIDTH) , (level.height - 10 ) * Tile.HEIGHT- 16,Team.Team1));
-        level.addEntity(new Pather((23+8.5)*32, (23+8.5)*32, Team.Neutral));
+        level.addEntity(new Pather((23+8.5)*32, (23+8.5)*32, Team.Team2));
 
         //players[0] = new Player(synchedKeys[0], level.width * Tile.WIDTH / 2 - 16, (level.height - 5 - 1) * Tile.HEIGHT - 16, Team.Team1);
         players[0] = new Player(synchedKeys[0], level.width * Tile.WIDTH / 2 - 16, level.height * Tile.HEIGHT / 2 - 16, Team.Team1);
@@ -384,13 +386,19 @@ public class MojamComponent extends Canvas implements Runnable, MouseMotionListe
 
     public static void main(String[] args) {
         MojamComponent mc = new MojamComponent();
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Catacomb Snatch: Arena");
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(mc);
         frame.setContentPane(panel);
         frame.pack();
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+        
+        ArrayList<BufferedImage> icoList = new ArrayList<BufferedImage>();
+        icoList.add(Art.icon32);
+        icoList.add(Art.icon64);
+        frame.setIconImages(icoList);
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         mc.start();
