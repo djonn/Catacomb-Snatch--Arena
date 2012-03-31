@@ -10,27 +10,29 @@ You have to kill your enemies in order to survive, if they destroy the Holy Grai
 
 #-- PLAYER --#
 X Player spawns in middle
-X shop with hearts(life) and turrets(much more expensive) (maybe also bomb, but bigger)
-    -green/blue revive heart if your friend dies in multiplayer
+X shop with hearts(life) and turrets(much more expensive) (maybe also bomb/landmine, but bigger)
+Z    -green/blue revive heart if your friend dies in multiplayer
 X Player does not regenerate, if he needs health he needs to buy hearts
 X Instead of %-score kill-score is shown
 	//---Multiplayer---//
-X Both players on same team (co-op) (players dont hurt each other)
+X Both players on same team (co-op) (players don't hurt each other)
 X Scores are shown respectively
 
 
 #-- MONSTERS --#
-Y[7] Monsters spawn at 4(maybe 8) spots (corners and sides)
-More kinds of monsters
-X[thanks to delvar]AI - Monsters are attracted to middle (grail?)(A* pathfinding) unless player is near
-Monsters drop less treasure
+X Monsters spawn at 4(maybe 8) spots (corners and sides)
+Z More kinds of monsters
+X[thanks to delvar]AI - (A* pathfinding)
+Ai are moving towards middle (grail)
+if player is near, mobs move towards him instead of grail
+Z Monsters drop less treasure
 X Spawners are not breakable
-Spawners cant be moved
+Spawners can't be moved
 
 
 #-- GUI --#
 X How-to tab (at main menu)
-pause - ingame (esc key)
+Z pause - ingame (esc key)
 display grail life
 multiplayer host/wait screen
 Y[levels] player scores, time, level info (maybe overall score)
@@ -40,15 +42,15 @@ Y[levels] player scores, time, level info (maybe overall score)
 Y Custom map
 Y[effect animation] Hearts for health regeneration
 X No tent area
-multiple levels (level progression)
-Buff's
-Difficulties, strong/more monsters
-Other weapons
+Z multiple levels (level progression)
+Z Buff's
+Z Difficulties, strong/more monsters
+Z Other weapons
 More monsters over time
 X Bats fly over holes
-Recoloring players/new skins for extra players (or color selection)
-4 player
-if other player quits, dont crash
+Z Recoloring players/new skins for extra players (or color selection)
+Z 4 player
+if other player quits, don't crash
 X taskbar icon + name
 destroyable grail (mobs only)
 
@@ -61,6 +63,7 @@ random spawner placement deactivated
 no winning
 W, S & Space can be used in menus
 FPS removed
+FIXES BUG - Ai didn't move instantly
 
 
 #-- ART --#
@@ -72,7 +75,7 @@ new game over image
 
 X = Done
 Y = Might need more attention
-Z = ??
+Z = Only maybe
 
 
 

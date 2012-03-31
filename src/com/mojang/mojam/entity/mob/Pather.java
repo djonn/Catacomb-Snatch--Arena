@@ -9,6 +9,7 @@ import com.mojang.mojam.entity.Entity;
 import com.mojang.mojam.entity.Player;
 import com.mojang.mojam.level.AStar;
 import com.mojang.mojam.level.AvoidableObject;
+import com.mojang.mojam.level.Level;
 import com.mojang.mojam.level.Path;
 import com.mojang.mojam.level.tile.*;
 import com.mojang.mojam.math.Mth;
@@ -47,16 +48,10 @@ public class Pather extends Mob {
 	private Vec2 dPos;
 	//private int team=0;
 	
-	/**
-	 * @param x
-	 * @param y
-	 */
-
-	
 	public Pather(double x, double y, int team) {
 		super(x, y, team);
 		setPos(x, y);
-		setStartHealth(4);
+		setStartHealth(7);
 		dir = TurnSynchronizer.synchedRandom.nextDouble() * Math.PI * 2;
 		minimapColor = 0xffff0000;
 		yOffs = 10;
@@ -71,9 +66,7 @@ public class Pather extends Mob {
 		aObjectArray = new ArrayList<AvoidableObject>();
 		this.team=team;
 	}
-	/**
-	 * @return
-	 */
+
 	private Player getPlayer() {
 		// get player
 		Set<Entity> entities = level.getEntities(pos.x - shootRadius, pos.y
@@ -85,19 +78,13 @@ public class Pather extends Mob {
 			if (!(e instanceof Player)) {
 				continue;
 			}
-			if (((Player) e).isNotFriendOf(this))
-				continue;
+			//if (((Player) e).isNotFriendOf(this))
+			//	continue;
 			closest = e;
 		}
 		return (Player) closest;
 	}
 
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.mojang.mojam.entity.mob.Mob#tick()
-	 */
 	public void tick() {
 		
 		ePosArray.clear();
@@ -109,6 +96,7 @@ public class Pather extends Mob {
 			return;
 
 		//tryToShoot();
+		
 		Vec2 moveTo = tryToPath();
 		if (moveTo != null) {
 			tryToMove(moveTo);
@@ -118,16 +106,12 @@ public class Pather extends Mob {
 		
 	}
 
-	/**
-	 * 
-	 */
 	private void resetPath() {
 		path = null;
 		pathTime = TurnSynchronizer.synchedRandom.nextInt(10) + 1;
 	}
 
-	/**
-	 * 
+	/*
 	 
 	private void tryToShoot() {
 		if (--shootDelay <= 0) {
@@ -166,18 +150,15 @@ public class Pather extends Mob {
 		}
 	}*/
 
-	/**
-	 * @return
-	 */
 	private Vec2 tryToPath() {
 		if (--pathTime > 0)
 			return null;
 
-		if (player == null) {
-			player = getPlayer();
-			pathTime = 100;
-			return null;
-		}
+		//if (player == null) {
+		//	player = getPlayer();
+		//	pathTime = 100;
+		//	return null;
+		//}
 
 		if (aStar == null)
 			this.aStar = new AStar(level, this);
@@ -198,16 +179,15 @@ public class Pather extends Mob {
 			//Tile tileTo = level.getTile(player.pos);
 			
 			
-			
-			Tile tileTo;
+			/*Tile tileTo;
 			do {
 				tileTo = level.getTile(player.pos);
 				if (!tileTo.canPass(this))
 					tileTo = null;
-			} while (tileTo == null);
+			} while (tileTo == null);*/
 			
 			
-			/*
+			
 			Tile tileTo;
 			int tileX = 0;
 			int tileY = 0;
@@ -219,7 +199,7 @@ public class Pather extends Mob {
 				tileTo = level.getTile(tileX, tileY);
 				if (!tileTo.canPass(this))
 					tileTo = null;
-			} while (tileTo == null);*/
+			} while (tileTo == null);
 
 			this.path = this.aStar.getPath(new Vec2(tileFrom.x, tileFrom.y),
 					new Vec2(tileTo.x, tileTo.y));
@@ -260,9 +240,6 @@ public class Pather extends Mob {
 		
 		return path.getWorldPos(path.getIndex());
 	}
-
-	
-	
 	
 	private ArrayList<AvoidableObject> getAvoidableEntities() {
 		ArrayList<AvoidableObject> r = new ArrayList<AvoidableObject>();
@@ -307,20 +284,23 @@ public class Pather extends Mob {
 					continue;
 				tDanger = 0.5;
 
-				r.add(
+				/*
+				 r.add(
 						new AvoidableObject(
-								level.getPositionFromTile((int) (x + cTilePos.x), (int) (y + cTilePos.y)),
-								tDanger,tile,new Vec2(Tile.WIDTH,Tile.HEIGHT)
-								));
+						level.getPositionFromTile(
+						(int) (x + cTilePos.x),
+						(int) (y + cTilePos.y)),
+						tDanger,
+						tile,
+						new Vec2(Tile.WIDTH,Tile.HEIGHT)
+						));
+				*/
 			}
 		}
 
 		return r;
 	}
 
-	/**
-	 * @param goal
-	 */
 	private void tryToMove(Vec2 goal) {
 
 		Vec2 dPos = goal.sub(pos);
@@ -351,7 +331,7 @@ public class Pather extends Mob {
 		for (AvoidableObject o : avoidableObjects) {
 
 			ePos = o.getPos().sub(pos);
-			eDanger = o.getDanger();
+			//eDanger = o.getDanger();
 
 			
 			eDistance = ePos.length();
@@ -365,11 +345,11 @@ public class Pather extends Mob {
 			ePosRads += Math.PI;
 			ePosRads = Mth.normalizeAngle(ePosRads, 0.0);
 
-			eDanger *= (objectAvoidanceRadius - eDistance )
-					/ objectAvoidanceRadius;
-			this.ePosArray.add(ePos.normal().scale((32*(eDanger+1))));
+			//eDanger *= (objectAvoidanceRadius - eDistance )
+			//		/ objectAvoidanceRadius;
+			//this.ePosArray.add(ePos.normal().scale((32*(eDanger+1))));
 			this.aObjectArray.add(o);
-			dPosRadsNew += (eDanger * ePosRads);
+			//dPosRadsNew += (eDanger * ePosRads);
 		}
 
 		double turnRate = Mth.normalizeAngle(dPosRadsNew, lastDirection)-lastDirection;
@@ -402,9 +382,6 @@ public class Pather extends Mob {
 
 	}
 
-	/*	*//**
-	 * @param goal
-	 */
 	/*
 	 * private void tryToMove(Vec2 goal) {
 	 * 
@@ -473,9 +450,7 @@ public class Pather extends Mob {
 	 * 
 	 * }
 	 */
-	/**
-	 * @param goal
-	 */
+
 	/*
 	 * private void tryToMove2(Vec2 goal) {
 	 * 
@@ -554,9 +529,8 @@ public class Pather extends Mob {
 	 * if (stepTime++ > 6) stepTime = 0; }
 	 * 
 	 * }
-	 *//**
-	 * @param goal
 	 */
+
 	/*
 	 * private void tryToMove1(Vec2 goal) {
 	 * 
@@ -634,30 +608,15 @@ public class Pather extends Mob {
 	 * }
 	 */
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.mojang.mojam.entity.mob.Mob#getDeatchSound()
-	 */
 	@Override
 	public String getDeatchSound() {
 		return "/sound/Enemy Death 2.wav";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.mojang.mojam.entity.mob.Mob#die()
-	 */
 	public void die() {
 		super.die();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.mojang.mojam.entity.mob.Mob#getSprite()
-	 */
 	public Bitmap getSprite() {
 		
 		if (team == Team.Team1 ) {
@@ -668,13 +627,6 @@ public class Pather extends Mob {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.mojang.mojam.entity.mob.Mob#collide(com.mojang.mojam.entity.Entity,
-	 * double, double)
-	 */
 	@Override
 	public void collide(Entity entity, double xa, double ya) {
 		super.collide(entity, xa, ya);
@@ -709,4 +661,48 @@ public class Pather extends Mob {
 		//screen.line((int) pos.x, (int) pos.y, (int) (dPos.x + pos.x),
 		//		(int) (dPos.y + pos.y), 0x800000FF);
 	}
+	
+	@Override
+    public void hurt(Bullet bullet) {
+        if (isImmortal) return;
+
+        //if (freezeTime <= 0) {
+            hurtTime = 40;
+            //freezeTime = 5;
+            health--;
+            if (bullet != null) {
+                xBump = bullet.xa / 5.0;
+                yBump = bullet.ya / 5.0;
+            }
+        //}
+        
+        if(health < 1){
+        	int killerteam = bullet.owner.team;
+        	
+        	if(killerteam == 1){
+        		Level.player1Score += 1;
+        	} else if (killerteam == 2){
+        		Level.player2Score += 1;
+        	}
+        	
+        }
+    }
+
+    public void hurt(Entity source, int damage) {
+        if (isImmortal) return;
+
+        //if (freezeTime <= 0) {
+            hurtTime = 40;
+            //freezeTime = 5;
+            health -= damage;
+            if (health < 0) {
+                health = 0;
+            //}
+
+            double dist = source.pos.dist(pos);
+            xBump = (pos.x - source.pos.x) / dist * 10;
+            yBump = (pos.y - source.pos.y) / dist * 10;
+        }
+    }
+	
 }
